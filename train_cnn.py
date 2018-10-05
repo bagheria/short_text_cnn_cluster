@@ -11,7 +11,7 @@ EMBEDDING_FILE = 'data/GoogleNews-vectors-negative300.bin'
 text_path = 'data/StackOverflow.txt'
 label_path = 'data/StackOverflow_gnd.txt'
 
-with open(text_path) as f:
+with open(text_path, encoding='utf-8') as f:
     data = [text.strip() for text in f]
 
 with open(label_path) as f:
@@ -129,7 +129,7 @@ def get_model():
     return model
 
 if __name__ == '__main__':
-    nb_epoch = 50
+    nb_epoch = 2
     checkpoint = ModelCheckpoint('models/weights.{epoch:03d}-{val_acc:.4f}.hdf5', monitor='val_acc', verbose=1, save_best_only=True, mode='auto')
     model = get_model()
     model.fit(X, B, validation_split=0.2,
